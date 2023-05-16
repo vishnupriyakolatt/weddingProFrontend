@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/static/css/main.073167de.css",
+    "main.js": "/static/js/main.6328fccb.js",
+    "static/media/photo.jpg": "/static/media/photo.228fa2aae2f02902e646.jpg",
+    "static/media/decor.jpg": "/static/media/decor.9f86eb0b646450f8d27e.jpg",
+    "static/media/features-1.jpg": "/static/media/features-1.2a1d2c5818caa635a9a8.jpg",
+    "static/media/hero-bg.png": "/static/media/hero-bg.6d43d04b1a2d9406aafe.png",
+    "static/media/features-2.jpg": "/static/media/features-2.38ad0a3765558aa17d66.jpg",
+    "static/media/ring.jpg": "/static/media/ring.4caf9cb931b28d0d1b63.jpg",
+    "static/media/venue.jpg": "/static/media/venue.23fc015e59e057c7261b.jpg",
+    "static/media/testimonial.jpg": "/static/media/testimonial.835c9ce7d7128e09019b.jpg",
+    "static/media/userRegister.jpg": "/static/media/userRegister.7c78eb41fa75995fe149.jpg",
+    "static/media/super.jpg": "/static/media/super.53f8ca5fe02b270a4605.jpg",
+    "static/media/logo.jpg": "/static/media/logo.068e3fb85d69780f44bd.jpg",
+    "static/media/avatar-3.png": "/static/media/avatar-3.139cf9bf423382872360.png",
+    "static/media/avatar-2.png": "/static/media/avatar-2.ae52c9a34ee0972574e2.png",
+    "static/media/avatar-4.png": "/static/media/avatar-4.8247eafdc9e6398e48d2.png",
+    "static/media/avatar-1.png": "/static/media/avatar-1.aabbb166b2124eb5f652.png",
+    "index.html": "/index.html",
+    "main.073167de.css.map": "/static/css/main.073167de.css.map",
+    "main.6328fccb.js.map": "/static/js/main.6328fccb.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073167de.css",
+    "static/js/main.6328fccb.js"
+  ]
+}
