@@ -2,6 +2,12 @@ import React, { useState, useEffect } from "react";
 import { CgMenuRight, CgClose } from "react-icons/cg";
 import { IoMdLock } from "react-icons/io";
 import { useLogout } from "../Hooks/User/useLogout";
+
+
+import { CalendarIcon } from '@heroicons/react/solid';
+
+// Initialization for ES Users
+
 // import logo
 import logo from "../assets/logo.jpg";
 // import data
@@ -55,36 +61,60 @@ const Header = () => {
           </div>
           {/* nav */}
           <nav className="hidden md:flex">
-            <ul className="md:flex md:gap-x-12">
-              {navigation.map((item, index) => {
-                return (
-                  <li key={index}>
-                    <NavLink to="/">
-                      {" "}
-                      <h1 className="capitalize text-gray-900 text-2xl   font-bold hover:border-b">
-                        {item.name}
-                      </h1>
-                    </NavLink>
-                  </li>
-                );
-              })}
+            <ul className="md:flex md:gap-x-4">
+              
+                             <NavLink to="/">
+                      <button
+  type="button"
+  class="inline-block rounded-full border-2 border-neutral-800 px-6 pb-[6px] pt-2 text-md font-medium uppercase leading-normal text-neutral-800 transition duration-150 ease-in-out hover:border-neutral-800 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-neutral-800 focus:border-neutral-800 focus:text-neutral-800 focus:outline-none focus:ring-0 active:border-neutral-900 active:text-neutral-900 dark:border-neutral-900 dark:text-neutral-900 dark:hover:border-neutral-900 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10 dark:hover:text-neutral-900 dark:focus:border-neutral-900 dark:focus:text-neutral-900 dark:active:border-neutral-900 dark:active:text-neutral-900"
+  data-te-ripple-init>
+    HOME
+
+</button></NavLink>
+
+<NavLink to="/bookpage">
+                      <button
+  type="button"
+  class="inline-block rounded-full border-2 border-neutral-800 px-6 pb-[6px] pt-2 text-md font-medium uppercase leading-normal text-neutral-800 transition duration-150 ease-in-out hover:border-neutral-800 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-neutral-800 focus:border-neutral-800 focus:text-neutral-800 focus:outline-none focus:ring-0 active:border-neutral-900 active:text-neutral-900 dark:border-neutral-900 dark:text-neutral-900 dark:hover:border-neutral-900 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10 dark:hover:text-neutral-900 dark:focus:border-neutral-900 dark:focus:text-neutral-900 dark:active:border-neutral-900 dark:active:text-neutral-900"
+  data-te-ripple-init>
+ Event 
+
+</button></NavLink>
+
+                    
+
+
+
+
+                   
               <li>
                 {!user && (
+                
                   <NavLink to="/login">
-                    <h1 className="capitalize text-gray-900 text-2xl   font-bold hover:border-b">
-                      <IoMdLock />
-                    </h1>
+                   
+                    <h1 className="capitalize text-gray-900 text-3xl w-10 h-10 font-bold hover:border-b">
+                    <IoMdLock className="mr-8 w-12 h-12"/>
+</h1>
+
                   </NavLink>
                 )}
                 {user && (
+          
                   <NavLink to="/">
-                    <h1 className="capitalize text-gray-900 text-2xl   font-bold hover:border-b" onClick={handlelogout}>
-                      LOGOUT
-                    </h1>
+                   
+                    <button
+  type="button"
+  class="inline-block rounded-full bg-neutral-800 px-6 pb-2 pt-2.5 text-md font-medium uppercase leading-normal text-neutral-50 shadow-[0_4px_9px_-4px_rgba(51,45,45,0.7)] transition duration-150 ease-in-out hover:bg-neutral-800 hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] focus:bg-neutral-800 focus:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] focus:outline-none focus:ring-0 active:bg-neutral-900 active:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] dark:bg-neutral-900 dark:shadow-[0_4px_9px_-4px_#030202] dark:hover:bg-neutral-900 dark:hover:shadow-[0_8px_9px_-4px_rgba(3,2,2,0.3),0_4px_18px_0_rgba(3,2,2,0.2)] dark:focus:bg-neutral-900 dark:focus:shadow-[0_8px_9px_-4px_rgba(3,2,2,0.3),0_4px_18px_0_rgba(3,2,2,0.2)] dark:active:bg-neutral-900 dark:active:shadow-[0_8px_9px_-4px_rgba(3,2,2,0.3),0_4px_18px_0_rgba(3,2,2,0.2)]" onClick={handlelogout}>
+ LOGOUT
+</button>
                   </NavLink>
+               
+
                 )}
+              
 
               </li>
+             
             </ul>
             <ul>
               <li></li>

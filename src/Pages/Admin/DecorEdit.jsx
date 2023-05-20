@@ -22,7 +22,9 @@ function DecorEdit() {
 
     useEffect(()=>{
         const fetchadmin=async()=>{
-            const response = await axios.get(`/admin/singleDecor/${id}`);
+            const response = await axios.get(`/admin/singleDecor/${id}`,{
+            
+            });
             const Decor=response.data;
             setname(Decor.name);
             setemail(Decor.email);

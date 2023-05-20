@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import {HiMenuAlt3} from "react-icons/hi";
 import {MdOutlineDashboard} from "react-icons/md";
 import {GiPartyPopper} from "react-icons/gi";
@@ -7,23 +7,41 @@ import {IoIosLogOut} from "react-icons/io";
 import { Link } from 'react-router-dom';
 import {GiPartyHat} from "react-icons/gi";
 import {FaHotel} from "react-icons/fa";
+import { toast } from "react-toastify";
+import axios from '../instance/axios'
+
 import { useSuperLogout } from '../Hooks/Superadmin/useSuperLogout';
 import { useAuthContext } from '../Hooks/useAuthContext';
 function Superadminbar() {
   const{logout}=useSuperLogout()
-  const{superadmin}=useAuthContext()
+
+ 
+
+ 
+      
+
+
+
+
+
+
+
 
   const handlelogout=()=>{
     logout()
   }
     const menus=[
-        {name:"Dashboard",link:'/',icon:MdOutlineDashboard },
-        {name:"Event",link:'/',icon:GiPartyPopper },
+        {name:"Dashboard",link:'/superadmin/dashboard',icon:MdOutlineDashboard },
+        
         {name:"Admins",link:'/superadmin/getadmin',icon:FaUserAlt },
         {name:"Venue-Category",link:'/superadmin/showvenuecat',icon:FaHotel },
      
       ];
       const [open,setOpen]=useState(true)
+
+
+
+
   return (
     <>
     <section className='flex gap-6'>
@@ -47,11 +65,18 @@ function Superadminbar() {
               <h2 onClick={handlelogout}>Logout</h2>
             </Link>
     
-    
+ 
     </div>
+    
   </div>
   
+  
+
+
 </section>
+
+
+
 </>
   )
 }

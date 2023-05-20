@@ -28,24 +28,24 @@ function Admin() {
 <fragments>
 
     <Routes>
-        <Route path='/'  element={<Adminlogin/>}/>
-        <Route path='/dashboard'  element={<Dashboard/>}/>
-        <Route path='/Venueview'  element={<Venuecat/>}/>
-        <Route path='/VenueAdd'  element={<VenuecatAdd/>}/>
-        <Route path='/customerview'  element={<CustomerView/>}/>
-        <Route path='/photographerview'  element={<Photoview/>}/>
-        <Route path='/photographeradd'  element={<PhotoAdd/>}/>
-        <Route path='/venuecollectadd'  element={<VenuecollectAdd/>}/>
-        <Route path='/venueDisplay'  element={<VenueDisplay/>}/>
-        <Route path='/Decordisplay'  element={<DecorDisplay/>}/>
-        <Route path='/Decoradd'  element={<DecorAdd/>}/>
-        <Route path='/venuesingle/:id'  element={<Venuesingle/>}/>
-        <Route path='/profile'  element={<AdminProfile/>}/>
-        <Route path='/photosingleview/:id'  element={<PhotoSingle/>}/>
-        <Route path='/decorsingleview/:id'  element={<Decorsingle/>}/>
-        <Route path='/decorEdit/:id'  element={<DecorEdit/>}/>
-        <Route path='/photoEdit/:id'  element={<PhotoEdit/>}/>
-        <Route path='/venueEdit/:id'  element={<VenueEdit/>}/>
+        <Route path='/'  element={!admin?<Adminlogin/>:<Dashboard/>}/>
+        <Route path='/dashboard'  element={admin?<Dashboard/>:<Adminlogin/>}/>
+        <Route path='/Venueview'  element={admin?<Venuecat/>:<Adminlogin/>}/>
+        <Route path='/VenueAdd'  element={admin?<VenuecatAdd/>:<Adminlogin/>}/>
+        <Route path='/customerview'  element={admin?<CustomerView/>:<Adminlogin/>}/>
+        <Route path='/photographerview'  element={admin?<Photoview/>:<Adminlogin/>}/>
+        <Route path='/photographeradd'  element={admin?<PhotoAdd/>:<Adminlogin/>}/>
+        <Route path='/venuecollectadd'  element={admin?<VenuecollectAdd/>:<Adminlogin/>}/>
+        <Route path='/venueDisplay'  element={admin?<VenueDisplay/>:<Adminlogin/>}/>
+        <Route path='/Decordisplay'  element={admin?<DecorDisplay/>:<Adminlogin/>}/>
+        <Route path='/Decoradd'  element={admin?<DecorAdd/>:<Adminlogin/>}/>
+        <Route path='/venuesingle/:id'  element={admin?<Venuesingle/>:<Adminlogin/>}/>
+        <Route path='/profile'  element={admin?<AdminProfile/>:<Adminlogin/>}/>
+        <Route path='/photosingleview/:id'  element={admin?<PhotoSingle/>:<Adminlogin/>}/>
+        <Route path='/decorsingleview/:id'  element={admin?<Decorsingle/>:<Adminlogin/>}/>
+        <Route path='/decorEdit/:id'  element={admin?<DecorEdit/>:<Adminlogin/>}/>
+        <Route path='/photoEdit/:id'  element={admin?<PhotoEdit/>:<Adminlogin/>}/>
+        <Route path='/venueEdit/:id'  element={admin?<VenueEdit/>:<Adminlogin/>}/>
        </Routes>
 
     </fragments>

@@ -13,9 +13,15 @@ function Superlogin() {
   const handleLogin = async (e) => {
     e.preventDefault();
     console.log('hiiiii');
-    await login(email, password);
-toast.success("login successfully")
-  };
+    try {
+      const response = await login(email, password);
+
+      toast.success("login successful")
+      }
+     catch (error) {
+      // toast.error("Invalid login details");
+    }
+  }    
 
   return (
     <div>

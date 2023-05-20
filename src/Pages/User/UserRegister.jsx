@@ -23,7 +23,7 @@ function UserRegister() {
         e.preventDefault();
        
   try{
-    await axios.post('/signup',{
+    const response=await axios.post('/signup',{
         ...Inpval
     }).then((data)=>{
 console.log(data.data);

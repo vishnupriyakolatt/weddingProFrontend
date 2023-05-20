@@ -2,17 +2,17 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from "../../instance/axios"
 import Adminsidebar from '../../Component/Adminsidebar'
+import { useAuthContext } from "../../Hooks/useAuthContext";
 
-import { postApi } from '../../services/apiCalls'
 import { toast } from 'react-toastify'
 
 const VenuecatAdd=()=> {
-    
+    const {admin}=useAuthContext()
     const[data,setdata]=useState('')
     const Navigate=useNavigate()
     const [name,setName]=useState("")
     const[image,setImage]=useState("")
-
+    const[loading,setloading]=useState(true)
 
     const addVenuecat=async(e)=>{
         console.log(name)
@@ -22,17 +22,24 @@ const VenuecatAdd=()=> {
         formData.append('image',image)
         console.log(image)
        
-        postApi('/admin/Venueadd',formData, (response)=>{
-            const{verified,message}=response.data
-            if(verified){
-                toast(message)
-                Navigate('/admin/Venueview')
-            }else{
-toast("not added")
-            }
-
-        })
-    }
+        try {
+            const response=await axios.post('/admin/Venueadd',formData,{
+                headers: {
+                    Authorization: `${admin.token}`,
+                  },
+            }) .then((response) => {
+              console.log(response);
+              if (response.data.message) {
+                Navigate("/admin/Venueview");
+              }
+            });
+            
+          } catch (error) {
+            
+          }
+          
+            };
+            
 
 
   return (

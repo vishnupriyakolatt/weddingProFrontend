@@ -21,15 +21,15 @@ function Adminlogin() {
         try {
           console.log('hjsjhjhj');
           const response = await login(email, password); // Assuming you have defined email and password variables
-          const { created, token, message } = response.data;
-          if (created === true) { // Use strict equality (===) instead of loose equality (==)
-            toast.success(message);
+          const { success, token, message } = response.data;
+          if (success === true) { 
+            toast.success("login successfully");
           } else {
-            toast.error(message);
+            toast.error("Invalid login details");
           }
-          toast.success("Login successful");
+         
         } catch (error) {
-          toast.error("Invalid login details");
+        //   toast.error("Invalid login details");
         }
     
       

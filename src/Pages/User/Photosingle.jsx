@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Adminsidebar from "../../Component/Adminsidebar";
+
 import { NavLink, useParams, useNavigate } from "react-router-dom";
 import axios from "../../instance/axios";
 import Header from '../../Component/Header'
@@ -13,7 +13,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 
 function Photosingle() {
   const { id } = useParams();
-  console.log(id);
+  // console.log(id);
   const {user}=useAuthContext()
 
 
@@ -27,14 +27,36 @@ function Photosingle() {
   const [image, setImage] = useState("");
   const [loading, setloading] = useState(true);
   const [modal, setModal] = useState(false);
-  const handleDateChange = (date) => {
+  const [isExist, setExist] = useState(false);
+const[amountPay,setAmountpay]=useState(0)
+
+  const handleDateChange = async(date) => {
+    
     setSelectedDate(date);
+    try {
+     
+      
+      const response = await axios
+      .post(`/checkDate/${id}`,
+      {
+        date,
+      },
+      {
+        headers: {
+          Authorization: `${user.token}`,
+        },
+      })
+      console.log(response.data.isExist)
+      setExist(response.data.isExist)
+     
+     
+  } catch (error) {}
   };
   
   const photobook = async () => {
 
     try {
-      console.log(selectedDate);
+     
       
       const response = await axios
       .post(`/photoBookadd/${id}`,
@@ -46,7 +68,8 @@ function Photosingle() {
           Authorization: `${user.token}`,
         },
       })
-      toast.success("payment done successfully");
+      
+      toast.success(response.data.message);
      
   } catch (error) {}
 };
@@ -67,7 +90,9 @@ function Photosingle() {
         setRate(photosingle.rate);
         setImage(photosingle.image);
 
-        
+        const amountpay=photosingle.rate*0.1
+console.log("hiiiii"+amountpay)
+setAmountpay(amountpay)
       setloading(false);
       } catch (error) {
         console.log(error);
@@ -77,7 +102,7 @@ function Photosingle() {
       viewPhotoSingle();
     },[id])
    
-
+console.log(selectedDate)
 
   return (
     <>
@@ -111,7 +136,7 @@ function Photosingle() {
                  
                   <p class="mt-0.5  text-black text-sm">
                     <span className="text-red-900 font-extrabold">
-                      Experiance:
+                      Experience:
                     </span>{" "}
                     {pexperiance} years
                   </p>
@@ -133,10 +158,11 @@ function Photosingle() {
                         withPortal
                       />
                       </div>
-                   
+                   {isExist?<p className="mt-4 bg-black text-white text-xl font-bold py-2 px-12 rounded justify-end">Sorry.photographer is not available on this date</p>:
                       <button className="mt-4 bg-black text-white text-xl font-bold py-2 px-12 rounded justify-end"  onClick={() => setModal(!modal)}>
                         Book Now
                       </button>
+                      }
             
             </div>
           </div>
@@ -157,48 +183,49 @@ function Photosingle() {
             </div>
           </div>
           {modal && (
-            <div className="fixed z-20 inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center">
-              <div className="bg-white p-2 rounded w-96 m-5">
-                <div className="flex justify-between">
-                  <h1 className="font-semibold text-center text-2xl px-5 my-5 text-gray-700">
-                    {"Details"}
-                  </h1>
-                  <button
-                    className="font-semibold mr-3 mb-8 text-xl"
-                    onClick={() => setModal(!modal)}
-                  >
-                    X
-                  </button>
-                </div>
-                <div className="flex flex-col  p-5">
-                  <PayPalScriptProvider
-                    options={{
-                      "client-id":
-                        "AR986YBuyOzayvXPq1yaXyQwaZ1oCETTKjCekqO_-iWm_EWpSkI3ZeWu2aNUAMyukJ4aIAkbQNWEqNa-",
-                    }}
-                  >
-                    <PayPalButtons
-                      createOrder={(data, actions) => {
-                        return actions.order.create({
-                          purchase_units: [{ amount: { value: "1.00" } }],
-                        });
-                      }}
-                      onApprove={async (data, actions) => {
-                        await actions.order.capture();
-                        photobook(selectedDate);
-                      }}
-                      onCancel={() => {
-                        toast.error("Payment cancelled");
-                      }}
-                      onError={() => {
-                        toast.error("Payment failed");
-                      }}
-                    />
-                  </PayPalScriptProvider>
-                </div>
-              </div>
-            </div>
-          )}
+  <div className="fixed z-20 inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center">
+    <div className="bg-white p-2 rounded w-96 m-5">
+      <div className="flex justify-between">
+        <h1 className="font-semibold text-center text-2xl px-5 my-5 text-gray-700">
+          {"Details"}
+        </h1>
+        <button
+          className="font-semibold mr-3 mb-8 text-xl"
+          onClick={() => setModal(!modal)}
+        >
+          X
+        </button>
+      </div>
+      <div className="flex flex-col p-5">
+        <PayPalScriptProvider
+          options={{
+            "client-id":
+              "AR986YBuyOzayvXPq1yaXyQwaZ1oCETTKjCekqO_-iWm_EWpSkI3ZeWu2aNUAMyukJ4aIAkbQNWEqNa-",
+          }}
+        >
+          <PayPalButtons
+            createOrder={(data, actions) => {
+              return actions.order.create({
+                purchase_units: [{ amount: { value:rate*0.1 } }],
+              });
+            }}
+            onApprove={async (data, actions) => {
+              await actions.order.capture();
+              photobook(selectedDate);
+            }}
+            onCancel={() => {
+              toast.error("Payment cancelled");
+            }}
+            onError={() => {
+              toast.error("Payment failed");
+            }}
+          />
+        </PayPalScriptProvider>
+      </div>
+    </div>
+  </div>
+)}
+
         </div>
       </div>
     </>

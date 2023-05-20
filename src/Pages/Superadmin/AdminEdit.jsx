@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import Superadminbar from '../../Component/Superadminbar';
 import axios from '../../instance/axios'
 import {useNavigate,useParams } from 'react-router-dom';
-
+import { useAuthContext } from "../../Hooks/useAuthContext";
 
 const AdminEdit=()=> {
     const {id}=useParams();
     //const history = useHistory();
     const Navigate=useNavigate()
+    const {superadmin}=useAuthContext()
     
     console.log(id)
     const[name,setName]=useState('')
@@ -20,7 +21,11 @@ const AdminEdit=()=> {
 
     useEffect(()=>{
         const fetchadmin=async()=>{
-            const response = await axios.get(`/superadmin/viewadminsingle/${id}`);
+            const response = await axios.get(`/superadmin/viewadminsingle/${id}`,{
+                headers: {
+                    Authorization: `${superadmin.token}`,
+                  },
+            });
             const admin=response.data;
             setName(admin.name);
             setEmail(admin.email);
@@ -37,7 +42,12 @@ const AdminEdit=()=> {
 const updateadmin=async(e)=>{
     e.preventDefault()
     const updateadmin={name,email,mobile,address,location};
-    await axios.put(`/superadmin/adminedit/${id}`,updateadmin)
+    await axios.put(`/superadmin/adminedit/${id}`,updateadmin,{
+        headers: {
+            Authorization: `${superadmin.token}`,
+          },
+      
+    })
     Navigate("/superadmin/getadmin")
     
 }

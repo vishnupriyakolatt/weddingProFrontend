@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import Adminsidebar from "../../Component/Adminsidebar";
 import { NavLink, useParams, useNavigate } from "react-router-dom";
 import axios from "../../instance/axios";
+import { useAuthContext } from "../../Hooks/useAuthContext";
 function Venuesingle() {
   const { id } = useParams();
 
-
+  const{admin}=useAuthContext()
   const [name, setname] = useState("");
   const [manager, setmanager] = useState("");
   const [type, setType] = useState("");
@@ -21,7 +22,11 @@ function Venuesingle() {
   useEffect(() => {
     const viewvenueSingle = async () => {
       try {
-        const res = await axios.get(`/admin/singleVenue/${id}`);
+        const res = await axios.get(`/admin/singleVenue/${id}`,{
+          headers: {
+            Authorization: `${admin.token}`,
+          },
+        });
         const venuesingle = res.data;
         setname(venuesingle.name);
         setdescription(venuesingle.description);

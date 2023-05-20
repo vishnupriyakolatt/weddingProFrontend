@@ -32,6 +32,7 @@ function Photographer() {
         console.log("hiii");
         const { message, data } = response.data;
         console.log(data);
+      
         setPhoto(data)
         setloading(false);
       } catch (error) {

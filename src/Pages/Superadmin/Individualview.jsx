@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import Superadminbar from "../../Component/Superadminbar";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import axios from '../../instance/axios';
+import { useAuthContext } from "../../Hooks/useAuthContext";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const Individualview = () => {
   const { id } = useParams("");
   console.log(id);
+  const {superadmin}=useAuthContext()
   // const [getuserdata, setuserdata] = useState({ name: "", email: "", phone: "" });
   const[name,setName]=useState('')
   const[age,setAge]=useState('')
@@ -15,10 +18,16 @@ const Individualview = () => {
   const[address,setAddress]=useState('')
   const[location,setLocation]=useState('')
   const[image,setImage]=useState('')
+  const [loading, setloading] = useState(true);
 useEffect(()=>{
   const viewsingle = async (e) => {
     
-    const res = await axios.get(`/superadmin/viewadminsingle/${id}`);
+    const res = await axios.get(`/superadmin/viewadminsingle/${id}`,{
+      headers: {
+        Authorization: `${superadmin.token}`,
+      },
+  
+    });
     const userindividual = res.data;
     
     setName(userindividual.name);
@@ -32,12 +41,18 @@ useEffect(()=>{
   }
   viewsingle();
 
+  setloading(false);
 },[id])
   
 
   return (
     <div className="flex gap-24">
       <Superadminbar />
+      {loading ? (
+              <div className="loader-container absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center">
+                <ClipLoader color={"#808080"} size={150} />
+              </div>
+            ) : (
       <div class="font-sans antialiased text-gray-900 leading-normal tracking-wider bg-cover">
 
 
@@ -92,9 +107,11 @@ useEffect(()=>{
 </div>
 
 
-     </div>
+
      </div>
      
+      )}
+    </div>
   );
 };
 

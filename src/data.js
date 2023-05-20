@@ -64,19 +64,19 @@ export const hero = {
 
 export const stats = [
   {
-    value: '1,360+',
+    value: '1+',
     text: 'Couples',
   },
   {
-    value: '503+',
+    value: '1+',
     text: 'Decorations',
   },
   {
-    value: '10k+',
+    value: '1+',
     text: 'Weddings',
   },
   {
-    value: '7+',
+    value: '1+',
     text: 'Experiance',
   },
 ];

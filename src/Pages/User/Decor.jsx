@@ -38,8 +38,8 @@ function Decor() {
    }, []);
   const datas = decor.map((data) => {
     return (
-      <div class="min-h-screen bg-gray-100 flex justify-center items-center">
-        <div class="max-w-sm bg-white border border-gray-300 rounded-lg shadow-lg w-full">
+      <div class="min-h-screen bg-gray-100 flex justify-center items-center mt-8">
+        <div class="max-w-sm bg-white border border-gray-300 rounded-lg shadow-lg w-full mt-25">
           <div class="flex justify-center">
             <img
               class="rounded-t-lg object-cover w-full h-64"

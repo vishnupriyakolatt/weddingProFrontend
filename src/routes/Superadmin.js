@@ -19,14 +19,14 @@ function Superadmin() {
     <fragments>
         <Routes>
         <Route path='/'  element={!superadmin?<Superlogin/>:<Dashboard/>}/>
-        <Route path='/dashboard'  element={<Dashboard/>}/>
-        <Route path='/getadmin'  element={<Adminview/>}/>
-        <Route path='/addadmin'  element={<Adminadd/>}/>
-        <Route path='/editadmin/:id'  element={<AdminEdit/>}/>
-        <Route path='/singleview/:id'  element={<Individualview/>}/>
+        <Route path='/dashboard'  element={superadmin ?<Dashboard/>:<Superlogin/>}/>
+        <Route path='/getadmin'  element={superadmin?<Adminview/>:<Superlogin/>}/>
+        <Route path='/addadmin'  element={superadmin?<Adminadd/>:<Superlogin/>}/>
+        <Route path='/editadmin/:id'  element={superadmin?<AdminEdit/>:<Superlogin/>}/>
+        <Route path='/singleview/:id'  element={superadmin?<Individualview/>:<Superlogin/>}/>
        
-        <Route path='/showvenuecat'  element={<Venuecat/>}/>
-        <Route path='/addvenuecat'  element={<VenuecatAdd/>}/>
+        <Route path='/showvenuecat'  element={superadmin?<Venuecat/>:<Superlogin/>}/>
+        <Route path='/addvenuecat'  element={superadmin?<VenuecatAdd/>:<Superlogin/>}/>
        
 
 

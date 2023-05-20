@@ -25,13 +25,38 @@ function Venusingle() {
   const [location, setlocation] = useState("");
   const [seats, setseats] = useState("");
   const [modal, setModal] = useState(false);
-  const handleDateChange = (date) => {
+   const [isExist, setExist] = useState(false);
+   const[amountpay,setAmountpay]=useState(0)
+  const handleDateChange = async(date) => {
+    console.log(date)
     setSelectedDate(date);
-  };
-  const bookVenue = async () => {
-   
     try {
-      const response = await axios.post(`/BookVenue/${id}`,
+     
+      
+      const response = await axios
+      .post(`/checkvenueDate/${id}`,
+      {
+        date,
+      },
+      {
+        headers: {
+          Authorization: `${user.token}`,
+        },
+      })
+      console.log(response.data.isExist)
+      setExist(response.data.isExist)
+     
+     
+  } catch (error) {}
+  };
+
+ const bookVenue = async () => {
+
+    try {
+     
+      
+      const response = await axios
+      .post(`/BookVenue/${id}`,
       {
         selectedDate,
       },
@@ -39,14 +64,17 @@ function Venusingle() {
         headers: {
           Authorization: `${user.token}`,
         },
-      }
-    );
-    
-    toast.success("payment done successfully");
-Navigate('/bookpage')
-
+      })
+      console.log(response.data.message)
+      console.log(response.data.status)
+      toast.success(response.data.message);
+     
   } catch (error) {}
 };
+
+
+
+
 const viewVenueSingle = async () => {
   try {
     const res = await axios.get(`/singleVenue/${id}`,{
@@ -64,6 +92,11 @@ const viewVenueSingle = async () => {
     setlocation(venuesingle.location);
   
     setseats(venuesingle.seats);
+
+
+    const amountpay=(venuesingle.rent)*0.1
+console.log(amountpay)
+setAmountpay(amountpay)
     setloading(false);
   } catch (error) {
     console.log(error);
@@ -138,10 +171,11 @@ const viewVenueSingle = async () => {
                       />
                       </div>
                    
-                    <button className="mt-4 bg-black text-white text-xl font-bold py-2 px-12 rounded justify-end"   onClick={() => setModal(!modal)}>
+                      {isExist?<p className="mt-4 bg-black text-white text-xl font-bold py-2 px-12 rounded justify-end">Sorry.photographer is not available on this date</p>:
+                      <button className="mt-4 bg-black text-white text-xl font-bold py-2 px-12 rounded justify-end"  onClick={() => setModal(!modal)}>
                         Book Now
                       </button>
-            
+                      }
             </div>
           </div>
 
@@ -189,7 +223,7 @@ const viewVenueSingle = async () => {
                     className="font-semibold mr-3 mb-8 text-xl"
                     onClick={() => setModal(!modal)}
                   >
-                    X
+                  X
                   </button>
                 </div>
                 <div className="flex flex-col  p-5">
@@ -202,7 +236,7 @@ const viewVenueSingle = async () => {
                     <PayPalButtons
                       createOrder={(data, actions) => {
                         return actions.order.create({
-                          purchase_units: [{ amount: { value: "1.00" } }],
+                          purchase_units: [{ amount: { value: rent*0.1 } }],
                         });
                       }}
                       onApprove={async (data, actions) => {

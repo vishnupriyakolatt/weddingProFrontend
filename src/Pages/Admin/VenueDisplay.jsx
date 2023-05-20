@@ -1,32 +1,81 @@
 import React, { useEffect, useState } from 'react'
-
+import axios from '../../instance/axios'
 import { NavLink } from 'react-router-dom';
 import Basetable from '../../Component/Basetable';
 import Adminsidebar from '../../Component/Adminsidebar';
-import { getApi } from '../../services/apiCalls';
+import ClipLoader from "react-spinners/ClipLoader";
+import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
+import { useAuthContext } from '../../Hooks/useAuthContext';
 
 
 function VenueDisplay() {
-    const[venue,setVenue]=useState([])
-  const [search, setsearch] = useState("");
- 
-
    
-    
-    useEffect(()=>{
-        getApi('/admin/venuecollectView',(response)=>{
-          const{message,verified,data}=response.data
-          console.log(response.data);
-          if(verified){
-            console.log("successful");
-            setVenue(data)
-          }else{
-            toast(message)
-          }
-        })
-      },[])
+
+    const{admin}=useAuthContext()
+    const[venue,setVenue]=useState([])
+    const [search, setsearch] = useState("");
+    const [filteredAdmin, setFilteredAdmin] = useState([]);
+  const [loading, setloading] = useState(true);
   
+    const fetchVenue = async () => {
+      try {
+        const response = await axios.get('/admin/venuecollectView', {
+          headers: {
+              Authorization: `${admin.token}`,
+          },
+        });
+        const { message, data } = response.data;
+        console.log(response.data);
+        console.log('Successful');
+        setVenue(data);
+
+        setFilteredAdmin(data);
+
+      setloading(false);
+      } catch (error) {
+        console.error('Error fetching photographer view:', error);
+      }
+    };
+    const handleDelete = async (id) => {
+        try {
+          const confirmResult = await Swal.fire({
+            title: 'Are you sure?',
+            text: 'You are about to delete the venue. This action cannot be undone.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Delete',
+            cancelButtonText: 'Cancel',
+          });
+      
+          if (confirmResult.isConfirmed) {
+            await axios.put(`/admin/deletevenue/${id}`, {
+              headers: {
+                Authorization: `${admin.token}`,
+              },
+            });
+            await fetchVenue();
+            toast.success('Venue  deleted successfully.');
+          }
+        } catch (error) {
+          console.log(error);
+          toast.error('Failed to delete venue category.');
+        }
+      };
+       
+    useEffect(() => {
+      fetchVenue();
+    }, []);
+    useEffect(() => {
+        setFilteredAdmin(
+            venue.filter((ven) =>
+            ven.name.toLowerCase().includes(search.toLowerCase())
+          )
+        );
+      }, [search, admin]);
+    
 
     const columns=[
       {
@@ -62,9 +111,9 @@ function VenueDisplay() {
           <NavLink to={`/admin/venueEdit/${row._id}`}><button className='bg-green-900  text-white font-bold py-2 px-4 rounded'><i className='fa fa-pencil' /></button></NavLink>
       },
       {
-          name:"Action",
-          selector:(row)=><button className='bg-red-900  text-white font-bold py-2 px-4 rounded'><i class="fa-solid fa-trash-can"></i></button>
-      },
+        name:"Action",
+        selector:(row)=><button onClick={()=>handleDelete(row._id)} className='bg-red-900  text-white font-bold  py-2 px-4 rounded'><i class="fa-solid fa-trash-can"></i></button>
+    },
       
       
   ];
@@ -77,12 +126,18 @@ return (
           <Adminsidebar/>
             
               <div className='d-flex w-8/12 flex-column align-items-center mx-auto'>
+              <div className="flex justify-end">
               <NavLink to="/admin/venuecollectadd">
               <button class="bg-green-900  text-white font-bold py-2 px-4 rounded-full mt-5 mb-5">
           ADD NEW VENUE
         </button>
         </NavLink>
-
+        </div>
+        {loading ? (
+              <div className="loader-container absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center">
+                <ClipLoader color={"#808080"} size={150} />
+              </div>
+            ) : (
                   <Basetable
                       columns={columns}
                        data={venue}
@@ -101,7 +156,7 @@ return (
                           />
                       }
                   />
-
+                  )}
               </div>
           </div>
       </>

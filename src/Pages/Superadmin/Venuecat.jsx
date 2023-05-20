@@ -7,6 +7,8 @@ import Basetable from '../../Component/Basetable'
 import { toast } from 'react-toastify'
 import ClipLoader from 'react-spinners/ClipLoader';
 import { useAuthContext } from "../../Hooks/useAuthContext";
+import Swal from 'sweetalert2';
+
 const Venuecat=()=> {
  const{id}=useParams();
  const {superadmin}=useAuthContext()
@@ -14,7 +16,7 @@ const Venuecat=()=> {
     const[venuecat,setVenuecat]=useState([])
     const [search, setsearch] = useState("");
     const [filtervenue,setFiltervenue]=useState([])
-    const[loading,setloading]=useState(false)
+    const[loading,setloading]=useState(true)
     
 
 
@@ -43,20 +45,33 @@ const getvenue=async()=>{
     }
 }
 const handleDelete = async (id) => {
-    try {
+  try {
+    const confirmResult = await Swal.fire({
+      title: 'Are you sure?',
+      text: 'You are about to delete the venue category. This action cannot be undone.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Delete',
+      cancelButtonText: 'Cancel',
+    });
+
+    if (confirmResult.isConfirmed) {
       await axios.put(`/superadmin/deletecat/${id}`, {
         headers: {
           Authorization: `${superadmin.token}`,
         },
       });
       await getvenue();
-      toast.success("Venue category deleted successfully.");
-    } catch (error) {
-      console.log(error);
-      toast.error("Failed to delete venue category.");
+      toast.success('Venue category deleted successfully.');
     }
-  };
-  
+  } catch (error) {
+    console.log(error);
+    toast.error('Failed to delete venue category.');
+  }
+};
+ 
 
 useEffect(()=>{
     getvenue()

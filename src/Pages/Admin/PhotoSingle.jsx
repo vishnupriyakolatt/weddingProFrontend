@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import Adminsidebar from "../../Component/Adminsidebar";
 import { NavLink, useParams, useNavigate } from "react-router-dom";
 import axios from "../../instance/axios";
+import { useAuthContext } from "../../Hooks/useAuthContext";
 
 function PhotoSingle() {
   const { id } = useParams();
   console.log(id);
-
+const{admin}=useAuthContext()
   const [pname, setPname] = useState("");
   const [pdesc, setPdesc] = useState("");
   const [pemail, setPemail] = useState("");
@@ -19,7 +20,11 @@ function PhotoSingle() {
   useEffect(() => {
     const viewPhotoSingle = async () => {
       try {
-        const res = await axios.get(`/admin/singlePhotographer/${id}`);
+        const res = await axios.get(`/admin/singlePhotographer/${id}`,{
+          headers: {
+            Authorization: `${admin.token}`,
+          },
+        });
         const photosingle = res.data;
         setPname(photosingle.pname);
         setPdesc(photosingle.pdesc);

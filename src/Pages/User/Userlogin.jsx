@@ -15,17 +15,11 @@ function Userlogin() {
   const loginuser = async (e) => {
     e.preventDefault();
     console.log('hjsjhjhj');
-    await login(email, Password);
-    // axios.post(
-    //   "/login",{
-    //     email,Password
-    //   }
-    // ).then((response)=>{
-    //   const {create}=response.data
-    //   // localStorage.setItem('userToken', token); // Store token in local storage
-    //   toast.success('login successfully')
-    //   navigate('/')
-    // })
+  await login(email, Password);
+console.log(error)
+   if(error){
+    toast.error(error)
+   }
   };
 
   return (

@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import Adminsidebar from "../../Component/Adminsidebar";
 import { NavLink, useParams, useNavigate } from "react-router-dom";
 import axios from "../../instance/axios";
-
+import { useAuthContext } from "../../Hooks/useAuthContext";
 function Decorsingle() {
+  const{admin}=useAuthContext()
   const { id } = useParams();
   console.log(id);
 
@@ -19,7 +20,11 @@ function Decorsingle() {
   useEffect(() => {
     const viewDecorSingle = async () => {
       try {
-        const res = await axios.get(`/admin/singleDecor/${id}`);
+        const res = await axios.get(`/admin/singleDecor/${id}`,{
+          headers: {
+            Authorization: `${admin.token}`,
+          },
+        });
         const Decorsingle = res.data;
         setname(Decorsingle.name);
         setdesc(Decorsingle.desc);

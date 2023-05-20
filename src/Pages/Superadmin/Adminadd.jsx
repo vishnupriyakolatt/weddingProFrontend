@@ -4,10 +4,11 @@ import axios from "../../instance/axios";
 import Superadminbar from "../../Component/Superadminbar";
 import { Radio } from "@material-tailwind/react";
 import { toast } from "react-toastify";
+import { useAuthContext } from "../../Hooks/useAuthContext";
 
 
 const Adminadd = () => {
-
+const{superadmin}=useAuthContext()
   const [data, setdata] = useState("");
   const Navigate = useNavigate();
   function GenderChange(event) {
@@ -42,10 +43,11 @@ const Adminadd = () => {
 try {
   const response=await axios.post('/superadmin/addadmin',formData,{
     headers: {
-      
+      Authorization: `${superadmin.token}`,
     },
   }) .then((response) => {
     console.log(response);
+    toast.error(response.data.erro)
     if (response.data.message) {
       Navigate("/superadmin/getadmin");
     }

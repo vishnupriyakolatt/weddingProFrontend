@@ -6,6 +6,8 @@ import Superadminbar from "../../Component/Superadminbar";
 import { useAuthContext } from "../../Hooks/useAuthContext";
 import { toast } from "react-toastify";
 import ClipLoader from "react-spinners/ClipLoader";
+import Swal from 'sweetalert2';
+
 
 const Adminview = () => {
   const { superadmin } = useAuthContext();
@@ -37,17 +39,39 @@ const Adminview = () => {
 
   const handleBlock = async (id) => {
     try {
-      await axios.put(`/superadmin/blockadmin/${id}`, {
-        headers: {
-          Authorization: `${superadmin.token}`,
-        },
+      const confirmResult = await Swal.fire({
+        title: 'Are you sure?',
+        text: 'You are about to Block/Unblock the admin details. This action cannot be undone.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Update',
+        cancelButtonText: 'Cancel',
       });
-
-      getAdmin();
+  
+      if (confirmResult.isConfirmed) {
+        const response=await axios.put(`/superadmin/blockadmin/${id}`, null, {
+          headers: {
+            Authorization: `${superadmin.token}`
+          },
+        });
+  
+        await getAdmin();
+        if(response.success==true){
+          toast.error(response.data.message);
+        }else{
+          toast.error(response.data.message)
+        }
+        
+      }
     } catch (error) {
       console.log(error);
+      toast.error('Failed to block.');
     }
   };
+  
+  
 
   useEffect(() => {
     getAdmin();

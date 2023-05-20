@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../Component/Header";
-import { NavLink, useParams, useNavigate, Navigate } from "react-router-dom";
+import { NavLink, useParams, useNavigate } from "react-router-dom";
 import axios from "../../instance/axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { Navigate } from "react-router-dom";
 import { useAuthContext } from "../../Hooks/useAuthContext";
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { toast } from "react-toastify";
 import ClipLoader from "react-spinners/ClipLoader";
+
 function Decorsinglepage() {
-  const { user } = useAuthContext();
+  
   const { id } = useParams();
-  console.log(id);
+  const { user } = useAuthContext();
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [loading, setloading] = useState(true);
+ 
 
   const [name, setname] = useState("");
   const [desc, setdesc] = useState("");
@@ -21,31 +23,56 @@ function Decorsinglepage() {
   const [rent, setRent] = useState("");
   const [image, setImage] = useState("");
   const [modal, setModal] = useState(false);
-
-  const handleDateChange = (date) => {
+  const [loading, setloading] = useState(true);
+  const [isExist, setExist] = useState(false);
+const[amountpay,setAmountpay]=useState(0)
+  const handleDateChange = async(date) => {
+    console.log(date)
     setSelectedDate(date);
-  };
-  const BookDecor = async () => {
     try {
-      console.log(selectedDate);
-
-      const response = axios.post(
-        `/BookDecor/${id}`,
-        {
-          selectedDate,
+     
+      
+      const response = await axios
+      .post(`/checkdecorDate/${id}`,
+      {
+        date,
+      },
+      {
+        headers: {
+          Authorization: `${user.token}`,
         },
-        {
-          headers: {
-            Authorization: `${user.token}`,
-          },
-        }
-      );
-
-      toast.success("payment done successfully");
-Navigate('/bookpage')
-
-    } catch (error) {}
+      })
+      console.log(response.data.isExist)
+      setExist(response.data.isExist)
+     
+     
+  } catch (error) {}
   };
+  
+  const BookDecor =  async () => {
+
+    try {
+     
+      
+      const response = await axios
+      .post(`/BookDecor/${id}`,
+      {
+        selectedDate,
+      },
+      {
+        headers: {
+          Authorization: `${user.token}`,
+        },
+      })
+      console.log(response.data.message)
+      console.log(response.data.status)
+      toast.success(response.data.message);
+     
+  } catch (error) {}
+};
+
+
+
   const viewDecorSingle = async () => {
     try {
       const res = await axios.get(`/singleDecor/${id}`, {
@@ -59,7 +86,9 @@ Navigate('/bookpage')
       setType(Decorsingle.type);
       setRent(Decorsingle.rent);
       setImage(Decorsingle.image);
-
+const amountpay=(Decorsingle.rent)*0.1
+console.log(amountpay)
+setAmountpay(amountpay)
       setloading(false);
     } catch (error) {
       console.log(error);
@@ -69,17 +98,14 @@ Navigate('/bookpage')
   useEffect(() => {
     viewDecorSingle();
   }, [id]);
-
+  
+console.log(selectedDate)
   return (
     <>
       <Header />
 
       <div className="bg-white">
-      {loading ? (
-             <div className="loader-container absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center">
-             <ClipLoader color={'#808080'} size={150} />
-           </div>
-            ) : (
+     
         <div class="flex flex-col md:lg:xl:flex-row bg-white">
           <div class="h-screen w-screen md:lg:xl:w-1/2 bg-white flex flex-wrap justify-center content-center">
             {/* <div class="h-screen w-screen md:lg:xl:w-1/2 bg-white flex flex-wrap justify-center content-center shadow-2xl "> */}
@@ -107,24 +133,23 @@ Navigate('/bookpage')
                 </div>
               </div>
               <div className="flex flex-col items-center justify-center mt-2">
-                <DatePicker
-                  selected={selectedDate}
-                  onChange={handleDateChange}
-                  minDate={new Date()}
-                  dateFormat="dd/MM/yyyy"
-                  className="rounded-lg p-2 border border-gray-400 text-black"
-                  placeholderText="Select a date"
-                  calendarClassName="bg-white rounded-lg shadow-lg"
-                  withPortal
-                />
+              <DatePicker
+                        selected={selectedDate}
+                        onChange={handleDateChange}
+                        minDate={new Date()}
+                        dateFormat="dd/MM/yyyy"
+                        className="rounded-lg p-2 border border-gray-400 text-black"
+                        placeholderText="Select a date"
+                        calendarClassName="bg-white rounded-lg shadow-lg"
+                        withPortal
+                      />
               </div>
 
-              <button
-                className="mt-4 bg-black text-white text-xl font-bold py-2 px-12 rounded justify-end"
-                onClick={() => setModal(!modal)}
-              >
-                Book Now
-              </button>
+                   {isExist?<p className="mt-4 bg-black text-white text-xl font-bold py-2 px-12 rounded justify-end">Sorry.Decor team is not available on this date</p>:
+                      <button className="mt-4 bg-black text-white text-xl font-bold py-2 px-12 rounded justify-end"  onClick={() => setModal(!modal)}>
+                        Book Now
+                      </button>
+                      }
             </div>
           </div>
 
@@ -179,13 +204,13 @@ Navigate('/bookpage')
                   <PayPalScriptProvider
                     options={{
                       "client-id":
-                        "AR986YBuyOzayvXPq1yaXyQwaZ1oCETTKjCekqO_-iWm_EWpSkI3ZeWu2aNUAMyukJ4aIAkbQNWEqNa-",
+                      "AR986YBuyOzayvXPq1yaXyQwaZ1oCETTKjCekqO_-iWm_EWpSkI3ZeWu2aNUAMyukJ4aIAkbQNWEqNa-",
                     }}
                   >
                     <PayPalButtons
                       createOrder={(data, actions) => {
                         return actions.order.create({
-                          purchase_units: [{ amount: { value: "1.00" } }],
+                          purchase_units: [{ amount: { value:rent*0.1 } }],
                         });
                       }}
                       onApprove={async (data, actions) => {
@@ -204,9 +229,9 @@ Navigate('/bookpage')
               </div>
             </div>
           )}
-        </div>
-            )}
+       </div>
       </div>
+   
     </>
   );
 }

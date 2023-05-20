@@ -36,7 +36,7 @@ function Venue() {
      }, []);
 	const datas = venue.map((data)=>{
 		return (
-      <div class="min-h-screen bg-gray-100 flex justify-center items-center">
+      <div class="min-h-screen bg-gray-100 flex justify-center items-center mt-8">
       <div class="max-w-sm bg-white border border-gray-300 rounded-lg shadow-lg w-full mt-10">
         <div class="flex justify-center mt-18">
           <img
