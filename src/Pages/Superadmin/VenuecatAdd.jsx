@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom'
 import axios from "../../instance/axios"
 import Superadminbar from '../../Component/Superadminbar'
 import { toast } from 'react-toastify'
-
+import { useAuthContext } from "../../Hooks/useAuthContext";
 const VenuecatAdd=()=> {
-
+    const{superadmin}=useAuthContext()
     const[data,setdata]=useState('')
     const Navigate=useNavigate()
     const [name,setName]=useState("")
@@ -21,7 +21,9 @@ const VenuecatAdd=()=> {
         console.log(image)
         try {
             const response=await axios.post('/superadmin/addVenuecat',formData,{
-
+                headers: {
+                    Authorization: `${superadmin.token}`,
+                  },
             }).then((response) => {
     console.log(response);
     if (response.data.message) {

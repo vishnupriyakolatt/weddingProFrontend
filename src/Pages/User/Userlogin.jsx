@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import userRegister from "../../assets/userRegister.jpg";
 import logo from "../../assets/logo.jpg";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useLogin } from "../../Hooks/User/useLogin";
 
 import { toast } from "react-toastify";
 
 function Userlogin() {
+  
   const {login, error, isloading} = useLogin();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -73,7 +74,7 @@ console.log(error)
               </p>
             </div>
             <div className="flex mx-auto font-bold">
-              <p className="flex items-center">Forgot password?</p>
+             <Link to='/forgot'> <p className="flex items-center">Forgot password?</p></Link>
             </div>
           </form>
         </div>

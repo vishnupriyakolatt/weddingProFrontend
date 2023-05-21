@@ -3,12 +3,12 @@ import React, { useEffect, useState } from 'react'
 import axios from '../../instance/axios'
 import {useNavigate,useParams } from 'react-router-dom';
 import Adminsidebar from '../../Component/Adminsidebar';
-
+import { useAuthContext } from '../../Hooks/useAuthContext';
 function VenueEdit() {
   const {id}=useParams();
     //const history = useHistory();
     const Navigate=useNavigate()
-    
+    const{admin}=useAuthContext()
     console.log(id)
     const [name, setname] = useState("");
     const [email, setemail] = useState("");
@@ -25,7 +25,11 @@ function VenueEdit() {
 
     useEffect(()=>{
         const fetchadmin=async()=>{
-            const response = await axios.get(`/admin/singleVenue/${id}`);
+            const response = await axios.get(`/admin/singleVenue/${id}`,{
+              headers: {
+                Authorization: `${admin.token}`
+            },
+            });
             const Venue=response.data;
             setname(Venue.name);
             setemail(Venue.email);

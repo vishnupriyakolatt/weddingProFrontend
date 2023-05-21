@@ -8,11 +8,12 @@ import { ResponsivePie } from "@nivo/pie";
 import Adminsidebar from '../../Component/Adminsidebar'
 
 
+
 function Dashboard() {
   const { admin } = useAuthContext();
 
   const [dashboardData, setDashboardData] = useState(null);
- 
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getDash();

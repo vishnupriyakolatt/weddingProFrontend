@@ -20,6 +20,7 @@ import Venusingle from "../Pages/User/Venusingle";
 import Details from "../Pages/User/Details";
 
 
+
 function User() {
   const {user}=useAuthContext()
   return (
@@ -38,6 +39,7 @@ function User() {
 
     <Route path='/venuesingle/:id' element={user?<Venusingle/>:<Navigate to='/login'/>}/>
     <Route path='/photosingle/:id' element={user?<Photosingle/>:<Navigate to='/login'/>}/>
+
 </Routes>
 </fragments>
   )

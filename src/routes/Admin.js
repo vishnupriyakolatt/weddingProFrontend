@@ -14,7 +14,7 @@ import VenueDisplay from '../Pages/Admin/VenueDisplay';
 import DecorDisplay from '../Pages/Admin/DecorDisplay';
 import DecorAdd from '../Pages/Admin/DecorAdd';
 import Venuesingle from '../Pages/Admin/Venuesingle';
-import AdminProfile from '../Pages/Admin/AdminProfile';
+
 import PhotoSingle from '../Pages/Admin/PhotoSingle';
 import Decorsingle from '../Pages/Admin/Decorsingle';
 import DecorEdit from '../Pages/Admin/DecorEdit';
@@ -40,7 +40,7 @@ function Admin() {
         <Route path='/Decordisplay'  element={admin?<DecorDisplay/>:<Adminlogin/>}/>
         <Route path='/Decoradd'  element={admin?<DecorAdd/>:<Adminlogin/>}/>
         <Route path='/venuesingle/:id'  element={admin?<Venuesingle/>:<Adminlogin/>}/>
-        <Route path='/profile'  element={admin?<AdminProfile/>:<Adminlogin/>}/>
+      
         <Route path='/photosingleview/:id'  element={admin?<PhotoSingle/>:<Adminlogin/>}/>
         <Route path='/decorsingleview/:id'  element={admin?<Decorsingle/>:<Adminlogin/>}/>
         <Route path='/decorEdit/:id'  element={admin?<DecorEdit/>:<Adminlogin/>}/>

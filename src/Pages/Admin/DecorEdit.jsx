@@ -3,9 +3,10 @@ import React, { useEffect, useState } from 'react'
 import axios from '../../instance/axios'
 import {useNavigate,useParams } from 'react-router-dom';
 import Adminsidebar from '../../Component/Adminsidebar';
-
+import { useAuthContext } from '../../Hooks/useAuthContext';
 function DecorEdit() {
   const {id}=useParams();
+  const{admin}=useAuthContext()
     //const history = useHistory();
     const Navigate=useNavigate()
     
@@ -23,7 +24,9 @@ function DecorEdit() {
     useEffect(()=>{
         const fetchadmin=async()=>{
             const response = await axios.get(`/admin/singleDecor/${id}`,{
-            
+              headers: {
+                Authorization: `${admin.token}`
+            },
             });
             const Decor=response.data;
             setname(Decor.name);
