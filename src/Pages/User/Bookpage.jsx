@@ -41,63 +41,66 @@ console.log(user)
 </button></Link>
 </div>
 
-       <div className="w-full  overflow-x-hidden flex justify-center  py-0 items-center overflow mx-auto">
-       
-         <div
-           id="slider"
-           className="h-full flex lg:gap-8 md:gap-6 gap-10 items-center justify-start transition ease-out mt-10 duration-700"
-         >
-             
-           <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-          <img
-               src={photograph}
-               alt="black chair and white table"
-               className="object-cover object-center w-80 h-full"
-             />
-             <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-               <h2 className="lg:text-xl leading-4 text-base lg:leading-5 text-white dark:text-gray-900"></h2>
-               <div className="flex h-full items-end pb-6">
-               <Link to='/photo'> <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white dark:text-gray-900">
-                   Photography
-                 </h3></Link>
-               </div>
-             </div>
-           </div>
-           <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-           <img
-               src={hi}
-               alt="black chair and white table"
-               className="object-cover object-center w-80 h-full"
-             />
-             <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-               <h2 className="lg:text-xl leading-4 text-base lg:leading-5 text-white dark:text-gray-900"></h2>
-               <div className="flex h-full items-end pb-6">
-                <Link to='/Decor'><h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white dark:text-gray-900">
-                   Decoration
-                 </h3></Link> 
-               </div>
-             </div>
-           </div>
-           <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-           <img
-               src={ven}
-               alt="black chair and white table"
-               className="object-cover object-center w-80 h-full"
-             />
-             <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-               <h2 className="lg:text-xl leading-4 text-base lg:leading-5 text-white dark:text-gray-900"></h2>
-               <div className="flex h-full items-end pb-6">
-               <Link to='/venue'>  <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white dark:text-gray-900">
-                   Venue
-                 </h3></Link>
-               </div>
+<div className="w-full flex justify-center py-0 items-center overflow-x-auto mx-auto">
+  <div
+    id="slider"
+    className="h-full flex lg:gap-8 md:gap-6 gap-10 items-center justify-start transition-transform mt-10 duration-700"
+    style={{ transform: "translateX(0)" }}
+  >
+    <div className="flex flex-shrink-0 relative w-full sm:w-auto">
+      <img
+        src={photograph}
+        alt="black chair and white table"
+        className="object-cover object-center w-80 h-full"
+      />
+      <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
+        <h2 className="lg:text-xl leading-4 text-base lg:leading-5 text-white dark:text-gray-900"></h2>
+        <div className="flex h-full items-end pb-6">
+          <Link to="/photo">
+            <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white dark:text-gray-900">
+              Photography
+            </h3>
+          </Link>
+        </div>
+      </div>
+    </div>
+    <div className="flex flex-shrink-0 relative w-full sm:w-auto">
+      <img
+        src={hi}
+        alt="black chair and white table"
+        className="object-cover object-center w-80 h-full"
+      />
+      <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
+        <h2 className="lg:text-xl leading-4 text-base lg:leading-5 text-white dark:text-gray-900"></h2>
+        <div className="flex h-full items-end pb-6">
+          <Link to="/Decor">
+            <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white dark:text-gray-900">
+              Decoration
+            </h3>
+          </Link>
+        </div>
+      </div>
+    </div>
+    <div className="flex flex-shrink-0 relative w-full sm:w-auto">
+      <img
+        src={ven}
+        alt="black chair and white table"
+        className="object-cover object-center w-80 h-full"
+      />
+      <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
+        <h2 className="lg:text-xl leading-4 text-base lg:leading-5 text-white dark:text-gray-900"></h2>
+        <div className="flex h-full items-end pb-6">
+          <Link to="/venue">
+            <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white dark:text-gray-900">
+              Venue
+            </h3>
+          </Link>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-             </div>
-           </div>
-       
-         </div>
-     
-       </div>
 
 
 <div className="w-full flex flex-wrap justify-center gap-3 items-center mt-9">

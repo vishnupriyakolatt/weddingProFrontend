@@ -19,6 +19,7 @@ const Photoview=()=> {
 
   const fetchPhotographerView = async () => {
     try {
+      const arr=[12,3,4,5,6]
       const response = await axios.get('/admin/photographerView', {
         headers: {
             Authorization: `${admin.token}`,

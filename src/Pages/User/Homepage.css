@@ -1,0 +1,61 @@
+@media (min-width: 768px) {
+    .hero-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 40rem;
+      position: relative;
+      overflow: hidden;
+      border-radius: 0.75rem;
+      background: url('https://images.pexels.com/photos/916340/pexels-photo-916340.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') center / cover no-repeat;
+      background-clip: border-box;
+      text-align: center;
+      color: #fff;
+    }
+  
+    .hero-content {
+      padding: 3rem 6rem;
+    }
+  
+    .hero-title {
+      font-size: 3rem;
+      line-height: 1.5;
+      font-weight: 600;
+    }
+  
+    .hero-button {
+      display: inline-block;
+      font-size: 2rem;
+      font-weight: 500;
+      padding: 1.5rem 3rem;
+      margin-top: 2rem;
+      border-radius: 0.5rem;
+      background-image: linear-gradient(to right, #00bcd4, #2979ff);
+      color: #fff;
+      cursor: pointer;
+    }
+  }
+  
+  /* Additional styles for smaller screens */
+  @media (max-width: 767px) {
+    .hero-section {
+      height: auto;
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+    }
+  
+    .hero-content {
+      padding: 2rem;
+    }
+  
+    .hero-title {
+      font-size: 2.5rem;
+    }
+  
+    .hero-button {
+      font-size: 1.5rem;
+      padding: 1.25rem 2rem;
+      margin-top: 1.5rem;
+    }
+  }
+  

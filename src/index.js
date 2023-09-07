@@ -11,8 +11,6 @@ root.render(
 <AuthContextProvider>
 <App />
 </AuthContextProvider>
-            
-   
 
 );
 <ToastContainer

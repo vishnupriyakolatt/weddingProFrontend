@@ -7,12 +7,14 @@ export const useLogin = () => {
   const [isLoading, setIsLoading] = useState(null)
   const { dispatch } = useAuthContext()
 
-  const login = async (email, password) => {
+  const login =  (email, password) =>
+  new Promise(async (resolve,reject) =>  {
     setIsLoading(true)
     setError(null)
 
     try {
       const response = await axios.post('/login', { email, password })
+      console.log(response);
       const json = response.data
 
       // save the user to the local storage
@@ -20,14 +22,15 @@ export const useLogin = () => {
 
       // update the auth context
       dispatch({ type: 'LOGIN', payload: json })
-
       setIsLoading(false)
+      resolve(response.data)
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
       setIsLoading(false)
-      setError(error.response.data.message)
+      setError(error.response.data.error)
+      reject(error.response.data.error)
     }
-  }
+  })
 
   return { login, isLoading, error }
 }

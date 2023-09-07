@@ -61,11 +61,11 @@ function Decor() {
             <table class="text-xs my-3">
                 <tbody><tr>
                     <td class="px-2 py-2 text-black text-lg font-extrabold">Type</td>
-                    <td class="px-2 py-2 text-lg font-bold">{data.type}</td>
+                    <td class="px-2 py-2 text-lg text-red-600 font-bold">{data.type}</td>
                 </tr>
                 <tr>
                     <td class="px-2 py-2 text-black  text-lg font-extrabold">Rent/Day</td>
-                    <td class="px-2 py-2 text-lg font-bold">{data.rent}</td>
+                    <td class="px-2 py-2 text-lg font-bold text-red-600">Rs {data.rent}</td>
                 </tr>
                 <tr><td><NavLink to={`/Decorsingle/${data._id}`}>
   <button

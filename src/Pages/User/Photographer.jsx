@@ -45,7 +45,7 @@ function Photographer() {
 
  const datas = photo.map((data)=>{
 	return (
-<div class="min-h-screen bg-gray-100 flex justify-center items-center">
+<div class="min-h-screen bg-gray-100 flex justify-center items-center mt-8">
         <div class="max-w-sm bg-white border border-gray-300 rounded-lg shadow-lg w-full">
           <div class="flex justify-center">
             <img
@@ -65,25 +65,30 @@ function Photographer() {
   <div class="container mx-auto p-9 bg-gray-300 max-w-sm rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-300 mt-0">
     <div class="flex justify-between items-center mt-0">
         {/* <div class="p-2"> */}
-            <table class="text-xs my-3">
-                <tbody><tr>
-                    <td class="px-2 py-2 text-black text-lg font-extrabold">Experiance</td>
-                    <td class="px-2 py-2 text-lg font-bold">{data.pexperiance} Years</td>
-                </tr>
-                <tr>
-                    <td class="px-2 py-2 text-black  text-lg font-extrabold">Rent/Day</td>
-                    <td class="px-2 py-2 text-lg font-bold">{data.rate}</td>
-                </tr>
-                <tr><td><NavLink to={`/photosingle/${data._id}`}>
-  <button
-    type="button"
-    class="text-white text-sm font-bold bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300  rounded-lg  px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
-  >
-    View
-  </button>
-</NavLink>
-</td></tr>
-            </tbody></table>
+        <table className="text-xs my-3 border-red-100">
+  <tbody>
+ 
+    <tr>
+      <td className="px-2 py-2 text-lg font-extrabold">Experience</td>
+      <td className="px-2 py-2 text-red-600 text-lg font-bold">{data.pexperiance} Years</td>
+    </tr>
+    <tr>
+      <td className="px-2 py-2 text-lg font-extrabold">Rent/Day</td>
+      <td className="px-2 py-2 text-lg  text-red-600 font-bold">RS {data.rate}</td>
+    </tr>
+    
+    <tr>
+      <td colSpan="2" className="px-2 py-2">
+        <NavLink to={`/photosingle/${data._id}`}>
+          <button className="text-white text-sm font-bold bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 rounded-lg px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
+            View
+          </button>
+        </NavLink>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 
            
         {/* </div> */}

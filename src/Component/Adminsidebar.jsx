@@ -6,9 +6,7 @@ import {GiPartyHat} from "react-icons/gi";
 import {FaHotel} from "react-icons/fa";
 import {GiPartyFlags} from "react-icons/gi";
 import {FaPlaceOfWorship} from "react-icons/fa";
-
 import {AiFillCamera} from "react-icons/ai";
-
 import {FaUserAlt} from "react-icons/fa";
 import {IoIosLogOut} from "react-icons/io";
 import { Link } from 'react-router-dom';

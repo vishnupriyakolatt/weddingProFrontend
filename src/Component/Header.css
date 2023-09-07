@@ -1,0 +1,132 @@
+/* Header container */
+.header {
+    position: fixed;
+    left: 0;
+    padding: 8px 0;
+    z-index: 10;
+    width: 100%;
+    transition: all 200ms;
+  }
+  
+  /* Logo */
+  .logo {
+    font-size: 5xl;
+    font-weight: bold;
+    font-style: italic;
+    color: #333333;
+    margin-right: 90px;
+    margin-top: 2px;
+  }
+  
+  /* Menu Icon */
+  .menu-icon {
+    font-size: 2xl;
+    font-size: 3xl;
+    color: #ffffff;
+    cursor: pointer;
+  }
+  
+  /* Navigation */
+  nav ul {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  nav ul a {
+    display: inline-block;
+    border: 2px solid #333333;
+    padding: 6px;
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #333333;
+    transition: all 150ms ease-in-out;
+  }
+  
+  nav ul a:hover {
+    border-color: #333333;
+    background-color: #333333;
+    color: #ffffff;
+  }
+  
+  /* Active Link */
+  nav ul a.active {
+    border-color: #333333;
+    background-color: #333333;
+    color: #ffffff;
+  }
+  
+  /* Mobile Navigation */
+  .nav-mobile {
+    position: fixed;
+    bottom: 0;
+    left: -100%;
+    width: 100%;
+    max-width: 320px;
+    height: 100vh;
+    background-color: #ffffff;
+    transition: all 200ms;
+    overflow-y: auto;
+  }
+  
+  .nav-mobile.open {
+    left: 0;
+  }
+  
+  .nav-mobile ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+  }
+  
+  .nav-mobile ul a {
+    display: block;
+    padding: 1rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #333333;
+    transition: all 150ms ease-in-out;
+  }
+  
+  .nav-mobile ul a:hover {
+    background-color: #333333;
+    color: #ffffff;
+  }
+  
+  .nav-mobile ul a.active {
+    background-color: #333333;
+    color: #ffffff;
+  }
+  
+  /* Responsive Styles */
+  @media screen and (max-width: 767px) {
+    /* Hide logo on small screens */
+    .logo {
+      display: none;
+    }
+  
+    /* Adjust menu icon size */
+    .menu-icon {
+      font-size: 2rem;
+    }
+  
+    /* Display mobile navigation */
+    nav {
+      display: none;
+    }
+  
+    .nav-mobile {
+      display: block;
+    }
+  }
+  
+  @media screen and (min-width: 768px) {
+    /* Hide mobile navigation */
+    .nav-mobile {
+      display: none;
+    }
+  }
+  
+  

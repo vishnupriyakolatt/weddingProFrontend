@@ -3,27 +3,21 @@ import { useNavigate } from "react-router-dom";
 import Adminsidebar from "../../Component/Adminsidebar";
 import axios from "../../instance/axios";
 
-
 const PhotoAdd = () => {
-  
   const [data, setdData] = useState("");
   const Navigate = useNavigate();
 
-  
   const [pname, setpName] = useState("");
   const [pemail, setpEmail] = useState("");
   const [pmobile, setpMobile] = useState("");
   const [paddress, setpAddress] = useState("");
   const [pexperiance, setpexperiance] = useState("");
   const [rate, setRate] = useState("");
-const [pdesc, setPdesc] = useState("");
+  const [pdesc, setPdesc] = useState("");
   const [image, setImage] = useState([]);
-  console.log(image);
   const [imgeError, setImageError] = React.useState(false);
   const handleImageChange = (e) => {
     const files = e.target.files;
-
-    console.log(files.length);
 
     const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/;
 
@@ -50,7 +44,6 @@ const [pdesc, setPdesc] = useState("");
   };
 
   const addphotographer = async (e) => {
-  
     e.preventDefault();
     const formData = new FormData();
     formData.append("pname", pname);
@@ -60,12 +53,13 @@ const [pdesc, setPdesc] = useState("");
     formData.append("paddress", paddress);
     formData.append("pexperiance", pexperiance);
     formData.append("rate", rate);
-    
-    for (let i = 0; i < image.length; i++) {
-        formData.append(`image`, image[i]);
-      }
 
-    console.log(formData);
+    for (let i = 0; i < image.length; i++) {
+      formData.append(`image`, image[i]);
+    }
+    for (const values of formData.entries()) {
+      console.log(values[0], values[1]);
+    }
 
     try {
       const response = await axios
@@ -80,6 +74,7 @@ const [pdesc, setPdesc] = useState("");
             Navigate("/admin/photographerview");
           }
         });
+   
     } catch (error) {}
   };
 
@@ -102,9 +97,6 @@ const [pdesc, setPdesc] = useState("");
                   </div>
                   <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                     <div className="flex flex-wrap">
-                     
-                      
-                     
                       <div className="w-full lg:w-6/12 px-4">
                         <div className="relative w-full mb-3">
                           <label
@@ -121,7 +113,7 @@ const [pdesc, setPdesc] = useState("");
                           />
                         </div>
                       </div>
-<div className="w-full lg:w-6/12 px-4">
+                      <div className="w-full lg:w-6/12 px-4">
                         <div className="relative w-full mb-3">
                           <label
                             className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -144,7 +136,7 @@ const [pdesc, setPdesc] = useState("");
                             className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                             htmlfor="grid-password"
                           >
-                             Email
+                            Email
                           </label>
                           <input
                             type="text"
@@ -176,7 +168,7 @@ const [pdesc, setPdesc] = useState("");
                             className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                             htmlfor="grid-password"
                           >
-                          Address
+                            Address
                           </label>
                           <input
                             type="text"
@@ -218,7 +210,7 @@ const [pdesc, setPdesc] = useState("");
                           />
                         </div>
                       </div>
-                     
+
                       <div className="w-full lg:w-6/12 px-4">
                         <div className="relative w-full mb-3">
                           <label
@@ -243,7 +235,7 @@ const [pdesc, setPdesc] = useState("");
                           )}
                         </div>
                       </div>
-                     </div>
+                    </div>
 
                     <hr className="mt-6 border-b-1 border-blueGray-300" />
                   </div>

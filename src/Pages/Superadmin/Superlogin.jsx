@@ -14,6 +14,7 @@ function Superlogin() {
     e.preventDefault();
     console.log('hiiiii');
     try {
+      console.log(email)
       const response = await login(email, password);
 
       toast.success("login successful")

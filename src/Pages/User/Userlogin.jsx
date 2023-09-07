@@ -4,7 +4,7 @@ import logo from "../../assets/logo.jpg";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useLogin } from "../../Hooks/User/useLogin";
 
-import { toast } from "react-toastify";
+import { toast,ToastContainer } from "react-toastify";
 
 function Userlogin() {
   
@@ -15,12 +15,10 @@ function Userlogin() {
 
   const loginuser = async (e) => {
     e.preventDefault();
-    console.log('hjsjhjhj');
-  await login(email, Password);
-console.log(error)
-   if(error){
-    toast.error(error)
-   }
+   login(email, Password)
+   .then((res)=>toast.success('Login Successfully'))
+   .catch((err)=>toast.error(error))
+
   };
 
   return (
@@ -38,6 +36,10 @@ console.log(error)
             <h2 className="text-4xl dark:text-white font-bold text-center">
               LOGIN HERE
             </h2>
+            {/* {error && tostfunction(error)
+            
+             <p className="text-center text-sm text-red-700"></p>
+             } */}
             <div className="flex flex-col py-2">
               <label>Email</label>
               <input

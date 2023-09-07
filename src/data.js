@@ -1,4 +1,5 @@
 // import icons
+
 import {
   IoLogoYoutube,
   IoLogoFacebook,
@@ -9,7 +10,7 @@ import {
   IoIosArrowRoundForward,
   IoIosChatboxes,
   IoMdLock,
-  IoIosList,IoIosArrowDown
+  IoIosList,IoIosArrowDown,
 } from 'react-icons/io';
 
 // import images
@@ -41,19 +42,18 @@ import Avatar4Img from './assets/img/avatar-4.png';
 export const navigation = [
   {
     name: 'HOME',
-    
+    to: '/',
   },
- 
   {
-    name: <IoIosChatboxes/>,
-    href: 'contact',
+    name: 'EVENT',
+    to: '/bookevent',
   },
-  // {
-  //   name: <IoMdLock/>,
-  //   href: 'about',
-  // },
- 
+  {
+    name: 'LOGOUT',
+    to: '/logout',
+  },
 ];
+
 
 export const hero = {
   title: 'Creative Home Simpify your Furniture',
@@ -62,24 +62,76 @@ export const hero = {
   buttonText: 'Shop Now',
 };
 
+
+
 export const stats = [
   {
-    value: '1+',
-    text: 'Couples',
+    text: 'Happy Couples',
+    image: 'testimonial.jpg',
+    logo: 'happy_couples_logo.png',
+    style: {
+      fontFamily: 'Arial',
+      fontSize: '24px',
+      fontWeight: 'bold',
+      fontStyle: 'italic',
+      color: '#333',
+    },
+    logoStyle: {
+      width: '50px',
+      height: '50px',
+    },
   },
   {
-    value: '1+',
-    text: 'Decorations',
+    text: 'Adorable Decorations',
+    image: 'adorable_decorations.jpg',
+    logo: 'decorations_logo.png',
+    style: {
+      fontFamily: 'font-secondary',
+      fontSize: '20px',
+      fontWeight: 'normal',
+      fontStyle: 'normal',
+      color: '#555',
+    },
+    logoStyle: {
+      width: '40px',
+      height: '40px',
+    },
   },
   {
-    value: '1+',
-    text: 'Weddings',
+    text: 'Memorable Weddings',
+    image:<ChairImg />,
+    logo: 'weddings_logo.png',
+    style: {
+      fontFamily: 'Helvetica',
+      fontSize: '26px',
+      fontWeight: 'bold',
+      fontStyle: 'normal',
+      color: '#222',
+    },
+    logoStyle: {
+      width: '60px',
+      height: '60px',
+    },
   },
   {
-    value: '1+',
-    text: 'Experiance',
+    text: 'Everlasting Memories',
+    image: 'everlasting_memories.jpg',
+    logo: 'memories_logo.png',
+    style: {
+      fontFamily: 'Georgia',
+      fontSize: '24px',
+      fontWeight: 'bold',
+      fontStyle: 'italic',
+      color: '#444',
+    },
+    logoStyle: {
+      width: '50px',
+      height: '50px',
+    },
   },
 ];
+
+
 
 export const features = {
   image: <Features1Img />,
