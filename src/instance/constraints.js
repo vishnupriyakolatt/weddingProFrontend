@@ -1,3 +1,3 @@
 //  export const BaseUrl = 'https://weddingpro.online/api'
-export const BaseUrl = 'http://localhost:5000'
-//ready ayo?
+export const BaseUrl = 'https://weddingprobackend-production.up.railway.app'
+
