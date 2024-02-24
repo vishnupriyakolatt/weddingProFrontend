@@ -6,7 +6,7 @@ import logo from '../assets/logo.jpg';
 const Hero = () => {
   const {title,subtitle,buttonText}=hero;
   return(
-   <section className='h-[671px] w-full bg-hero bg-right text-black bg-cover bg-no-repeat  pt-[225px] pb-[254px] relative mb-12 lg:bg-center lg:mb-28'>
+   <section className='h-[671px]  w-full bg-hero bg-right text-black bg-cover bg-no-repeat  pt-[225px] pb-[254px] relative mb-12 lg:bg-center lg:mb-28'>
     <div className='container mx-auto text-center'>
       <h1 className='text-2xl mx-auto font-semibold mb-[30px] lg:text-[64px] lg:leading-tight lg:max-w-[70px]'></h1></div>
 <h2 className='mb-[30px] max-w-[627px] mx-auto lg:mb-[65px] lg:text-ul'></h2>

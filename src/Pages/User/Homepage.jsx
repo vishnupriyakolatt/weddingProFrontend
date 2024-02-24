@@ -5,12 +5,9 @@ import Hero from '../../Component/Hero'
 import Features from '../../Component/Features';
 import Newitems from '../../Component/NewItems';
 import FeaturesSecond from '../../Component/FeaturesSecond';
-import NewItems from '../../Component/NewItems';
-import logo from '../../assets/logo.jpg';
-import Testimonial from '../../Component/Testimonial';
+
 import Footer from '../../Component/Footer';
-import photo from '../../Pages/User/Photographer'
-import ring from '../../assets/ring.jpg'
+
 
 
 function Homepage() {
@@ -36,7 +33,7 @@ function Homepage() {
 
   <Newitems/>
   <FeaturesSecond />
-      <Testimonial />
+
       <Footer />
      </div>
     
